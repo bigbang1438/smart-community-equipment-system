@@ -1,0 +1,44 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: smart-community
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/smart_community?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+
+# 自定义配置
+smart:
+  jwt:
+    secret: smart-community-secret-key-2025-8s2k9f1j
+    expire-hours: 72
+  # 二维码指向的移动端巡检地址（前端开发服务器或部署地址）
+  qr:
+    # 二维码指向地址：局域网 IP（手机扫码演示用）；如 IP 变化请同步修改
+    # 二维码内容前缀：手机扫码演示时需为电脑的局域网地址（当前使用手机热点，电脑 IP 172.20.10.5）
+    # 换网络后请同步修改（注意需与 database/gen_seed.py 的 QR_BASE 保持一致）
+    base-url: http://172.20.10.5:5173/mobile/scan
+  # 登录不需要验证的路径
+  auth:
+    whitelist:
+      - /api/auth/login
+      - /api/monitor/device-status
