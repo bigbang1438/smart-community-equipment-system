@@ -15,6 +15,7 @@ frontend/dist/
 # Tool
 .reasonix/
 reasonix.toml
+DELIVERY_CHECK.md
 
 # OS
 Thumbs.db
